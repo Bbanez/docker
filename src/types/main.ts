@@ -54,6 +54,12 @@ export interface Docker {
       onChunk?: ChildProcessOnChunk;
     }): Promise<void>;
     exists(nameOrId: string): Promise<boolean>;
+    exec(
+      command: string[] | string,
+      options?: {
+        onChunk?: ChildProcessOnChunk;
+      },
+    ): Promise<void>;
   };
   image: {
     pull(

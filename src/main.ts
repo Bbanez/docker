@@ -176,6 +176,20 @@ export const Docker: DockerType = {
         return false;
       }
     },
+    async exec(command, options) {
+      if (options && options.onChunk) {
+        await ChildProcess.advancedExec(
+          `docker exec ${
+            command instanceof Array ? command.join(' ') : command
+          }`,
+          {
+            onChunk: options.onChunk,
+          },
+        ).awaiter;
+      } else {
+        await ChildProcess.spawn('docker', ['exec', ...command]);
+      }
+    },
   },
   image: {
     async pull(name, options) {
