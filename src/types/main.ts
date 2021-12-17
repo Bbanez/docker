@@ -18,46 +18,54 @@ export interface Docker {
       lines: string;
       options?: {
         onChunk?: ChildProcessOnChunk;
+        doNotThrowError?: boolean;
       };
     }): Promise<void>;
     tail(data: {
       nameOrId: string;
       lines?: number;
       onChunk: ChildProcessOnChunk;
+      doNotThrowError?: boolean;
     }): ChildProcessExecOutput;
     start(
       nameOrId: string,
       options?: {
         onChunk?: ChildProcessOnChunk;
+        doNotThrowError?: boolean;
       },
     ): Promise<void>;
     stop(
       nameOrId: string,
       options?: {
         onChunk?: ChildProcessOnChunk;
+        doNotThrowError?: boolean;
       },
     ): Promise<void>;
     restart(
       nameOrId: string,
       options?: {
         onChunk?: ChildProcessOnChunk;
+        doNotThrowError?: boolean;
       },
     ): Promise<void>;
     remove(
       nameOrId: string,
       options?: {
         onChunk?: ChildProcessOnChunk;
+        doNotThrowError?: boolean;
       },
     ): Promise<void>;
     run(config: {
       args: DockerArgs;
       onChunk?: ChildProcessOnChunk;
+      doNotThrowError?: boolean;
     }): Promise<void>;
     exists(nameOrId: string): Promise<boolean>;
     exec(
       command: string[] | string,
       options?: {
         onChunk?: ChildProcessOnChunk;
+        doNotThrowError?: boolean;
       },
     ): Promise<void>;
   };
@@ -66,12 +74,14 @@ export interface Docker {
       name: string,
       options?: {
         onChunk?: ChildProcessOnChunk;
+        doNotThrowError?: boolean;
       },
     ): Promise<void>;
     remove(
       nameOrId: string,
       options?: {
         onChunk?: ChildProcessOnChunk;
+        doNotThrowError?: boolean;
       },
     ): Promise<void>;
     list(): Promise<DockerImageList>;

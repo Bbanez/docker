@@ -91,19 +91,21 @@ export const Docker: DockerType = {
           `docker logs --tail ${lines} ${nameOrId}`,
           {
             onChunk: options.onChunk,
+            doNotThrowError: options.doNotThrowError,
           },
         ).awaiter;
       } else {
         await ChildProcess.spawn('docker', ['logs', '--tail', lines, nameOrId]);
       }
     },
-    tail({ nameOrId, lines, onChunk }) {
+    tail({ nameOrId, lines, onChunk, doNotThrowError }) {
       return ChildProcess.advancedExec(
         `docker logs --tail ${
           typeof lines === 'number' ? lines : 100
         } -f ${nameOrId}`,
         {
           onChunk,
+          doNotThrowError,
         },
       );
     },
@@ -111,6 +113,7 @@ export const Docker: DockerType = {
       if (options && options.onChunk) {
         await ChildProcess.advancedExec(`docker start ${nameOrId}`, {
           onChunk: options.onChunk,
+          doNotThrowError: options.doNotThrowError,
         }).awaiter;
       } else {
         await ChildProcess.spawn('docker', ['start', nameOrId]);
@@ -120,6 +123,7 @@ export const Docker: DockerType = {
       if (options && options.onChunk) {
         await ChildProcess.advancedExec(`docker stop ${nameOrId}`, {
           onChunk: options.onChunk,
+          doNotThrowError: options.doNotThrowError,
         }).awaiter;
       } else {
         await ChildProcess.spawn('docker', ['stop', nameOrId]);
@@ -129,6 +133,7 @@ export const Docker: DockerType = {
       if (options && options.onChunk) {
         await ChildProcess.advancedExec(`docker rm ${nameOrId}`, {
           onChunk: options.onChunk,
+          doNotThrowError: options.doNotThrowError,
         }).awaiter;
       } else {
         await ChildProcess.spawn('docker', ['rm', nameOrId]);
@@ -138,6 +143,7 @@ export const Docker: DockerType = {
       if (options && options.onChunk) {
         await ChildProcess.advancedExec(`docker restart ${nameOrId}`, {
           onChunk: options.onChunk,
+          doNotThrowError: options.doNotThrowError,
         }).awaiter;
       } else {
         await ChildProcess.spawn('docker', ['restart', nameOrId]);
@@ -163,6 +169,7 @@ export const Docker: DockerType = {
       if (config.onChunk) {
         await ChildProcess.advancedExec(`docker run ${args.join(' ')}`, {
           onChunk: config.onChunk,
+          doNotThrowError: config.doNotThrowError,
         }).awaiter;
       } else {
         await ChildProcess.spawn('docker', ['run', ...args]);
@@ -184,6 +191,7 @@ export const Docker: DockerType = {
           }`,
           {
             onChunk: options.onChunk,
+            doNotThrowError: options.doNotThrowError,
           },
         ).awaiter;
       } else {
@@ -196,6 +204,7 @@ export const Docker: DockerType = {
       if (options && options.onChunk) {
         await ChildProcess.advancedExec(`docker pull ${name}`, {
           onChunk: options.onChunk,
+          doNotThrowError: options.doNotThrowError,
         }).awaiter;
       } else {
         await ChildProcess.spawn('docker', ['pull', name]);
@@ -205,6 +214,7 @@ export const Docker: DockerType = {
       if (options && options.onChunk) {
         await ChildProcess.advancedExec(`docker rmi ${nameOrId}`, {
           onChunk: options.onChunk,
+          doNotThrowError: options.doNotThrowError,
         }).awaiter;
       } else {
         await ChildProcess.spawn('docker', ['rmi', nameOrId]);
